@@ -1,0 +1,17 @@
+{% extends 'base.html' %}
+{% block content %}
+
+<h1>Sales List</h1>
+
+{% for sale in sales %}
+  <div class="card">
+    <div class="card-content">
+      <span class="card-title">Name:{{ sale.name }}</span>
+      <p>og-price: {{ sale.ogprice }}</p>
+      <p>Percentage: {{ sale.percentage }}</p>
+      <p>af-price: {{ sale.afprice }}</p>
+    </div>
+  </div>
+{% endfor %}
+
+{% endblock %}
