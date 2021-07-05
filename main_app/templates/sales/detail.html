@@ -1,0 +1,16 @@
+{% extends 'base.html' %}
+{% block content %}
+
+<h1>Sale Details</h1>
+
+<div class="card">
+  <div class="card-content">
+    <span class="card-title">Name:{{ sale.name }}</span>
+    <p>OGprice: {{ sale.ogprice }}</p>
+    <p>Percentage: {{ sale.percentage }}</p>
+    <p>Afprice: {{ sale.afprice }}</p>
+   
+  </div>
+</div>
+
+{% endblock %}

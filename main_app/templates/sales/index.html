@@ -5,6 +5,7 @@
 
 {% for sale in sales %}
   <div class="card">
+    <a href="/sales/{{ sale.id }}">
     <div class="card-content">
       <span class="card-title">Name:{{ sale.name }}</span>
       <p>og-price: {{ sale.ogprice }}</p>
@@ -14,4 +15,4 @@
   </div>
 {% endfor %}
 
-{% endblock %}
+{% endblock %}  
