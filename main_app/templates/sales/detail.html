@@ -9,8 +9,10 @@
     <p>OGprice: {{ sale.ogprice }}</p>
     <p>Percentage: {{ sale.percentage }}</p>
     <p>Afprice: {{ sale.afprice }}</p>
-   
   </div>
 </div>
-
+<div class="card-action">
+  <a href="{% url 'sales_update' sale.id %}">Edit</a>
+  <a href="{% url 'sales_delete' sale.id %}">Delete</a>
+</div>
 {% endblock %}
