@@ -15,4 +15,36 @@
   <a href="{% url 'sales_update' sale.id %}">Edit</a>
   <a href="{% url 'sales_delete' sale.id %}">Delete</a>
 </div>
+<div class="col s6">
+  <form action="{% url 'add_mod' sale.id %}" method="post">
+    {% csrf_token %}
+    {{ mod_form.as_p }}
+    <input type="submit" class="btn" value="Add Mod">
+  </form>
+  <table class="striped">
+    <thead>
+      <tr><th>Date</th><th>Mods</th></tr>
+    </thead>
+    <tbody>
+      {% for mod in sale.mod_set.all %}
+        <tr>
+          <td>{{mod.date}}</td>
+          <td>{{mod.get_mods_display}}</td>
+        </tr>
+      {% endfor %}
+    </tbody>
+  </table>
+</div>
+</div>
+<script>
+  var dateEl = document.getElementById('id_date');
+  M.Datepicker.init(dateEl, {
+    format: 'yyyy-mm-dd',
+    defaultDate: new Date(),
+    setDefaultDate: true,
+    autoClose: true
+  });
+  var selectEl = document.getElementById('id_mods');
+  M.FormSelect.init(selectEl);
+</script>
 {% endblock %}
