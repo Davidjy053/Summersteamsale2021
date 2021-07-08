@@ -16,5 +16,6 @@ urlpatterns = [
     path('genres/<int:pk>/update/', views.GenresUpdate.as_view(), name='genres_update'),
     path('genres/<int:pk>/delete/', views.GenresDelete.as_view(), name='genres_delete'),
     path('sales/<int:sale_id>/assoc_genres/<int:genres_id>/', views.assoc_genres, name='assoc_genres'),
+    path('accounts/signup/', views.signup, name='signup'),
 
 ]
