@@ -63,4 +63,4 @@ class GenresDelete(DeleteView):
 
 def assoc_genres(request, sale_id, genres_id):
   Sales.objects.get(id=sale_id).genres.add(genres_id)
-  return redirect('detail', sale_id=sale_id)
+  return redirect(f'/sales/{sale_id}', sale_id = sale_id)
