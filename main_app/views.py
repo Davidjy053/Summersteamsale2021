@@ -1,6 +1,7 @@
 from django.shortcuts import render, redirect
-from main_app.models import Sales
+from main_app.models import Sales , Genres
 from django.views.generic.edit import CreateView, UpdateView, DeleteView
+from django.views.generic import ListView, DetailView
 from .forms import ModForm
 
 # Define the home view
@@ -16,8 +17,9 @@ def index(request):
 
 def sale_detail(request, sales_id):
   sale = Sales.objects.get(id=sales_id)
+  genres_sale_doesnt_have = Genres.objects.exclude(id__in = sale.genres.all().values_list('id'))
   mod_form = ModForm()
-  return render(request, 'sales/detail.html', { 'sale': sale , 'mod_form': mod_form })
+  return render(request, 'sales/detail.html', { 'sale': sale , 'mod_form': mod_form ,'genres': genres_sale_doesnt_have })
 
 class SalesCreate(CreateView):
   model = Sales
@@ -39,4 +41,26 @@ def add_mod(request, sale_id):
     new_feeding = form.save(commit=False)
     new_feeding.sale_id = sale_id
     new_feeding.save()
-  return redirect('detail', sales_id=sale_id)
+  return redirect('detail', sale_id=sale_id)
+class GenresList(ListView):
+  model = Genres
+
+class GenresDetail(DetailView):
+  model = Genres
+
+class GenresCreate(CreateView):
+  model = Genres
+  fields = '__all__'
+
+class GenresUpdate(UpdateView):
+  model = Genres
+  fields = ['name', 'color']
+
+class GenresDelete(DeleteView):
+  model = Genres
+  success_url = '/genres/'
+
+
+def assoc_genres(request, sale_id, genres_id):
+  Sales.objects.get(id=sale_id).genres.add(genres_id)
+  return redirect('detail', sale_id=sale_id)
