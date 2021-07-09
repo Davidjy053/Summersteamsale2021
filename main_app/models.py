@@ -44,4 +44,10 @@ class Mod(models.Model):
         return f"{self.get_mods_display()} on {self.date}"  
     class Meta:
         ordering = ['-date']
-    
+
+class Photo(models.Model):
+    url = models.CharField(max_length=200)
+    sales = models.ForeignKey(Sales, on_delete=models.CASCADE)
+
+    def __str__(self):
+        return f"Photo for sales_id: {self.sales_id} @{self.url}"
